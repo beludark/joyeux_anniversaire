@@ -1,73 +1,83 @@
-// Liste des 37 images dans le dossier "images"
-const photos = [];
-for (let i = 1; i <= 37; i++) {
-  photos.push(`images/${i}.jpg`);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// Fonction pour mélanger un tableau
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #fdf5e6;
+  color: #333;
+  text-align: center;
 }
 
-// Changer les photos toutes les 5 secondes
-let currentIndex = 0;
-
-function changePhotos() {
-  const photoGrid = document.getElementById("photo-grid");
-  const shuffledPhotos = shuffle([...photos]); // Mélanger les photos
-
-  // Vider la grille actuelle
-  photoGrid.innerHTML = "";
-
-  // Affiche 4 nouvelles photos
-  for (let i = 0; i < 4; i++) {
-    const imgElement = document.createElement("img");
-    imgElement.src = shuffledPhotos[(currentIndex + i) % shuffledPhotos.length];
-    imgElement.alt = `Photo ${i + 1}`;
-    imgElement.classList.add("hidden"); // Masquer au début pour la transition
-    photoGrid.appendChild(imgElement);
-
-    // Faire apparaître l'image après un court délai
-    setTimeout(() => imgElement.classList.remove("hidden"), 100);
-  }
-
-  // Avancer l'index
-  currentIndex = (currentIndex + 4) % shuffledPhotos.length;
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-// Appel de la fonction au chargement de la page
-window.onload = function () {
-  changePhotos(); // Afficher les premières photos
-  countdown(); // Démarrer le compte à rebours
+header h1 {
+  font-size: 3em;
+  color: #e75480;
+  margin-bottom: 20px;
+}
 
-  // Changer les photos toutes les 5 secondes
-  setInterval(changePhotos, 5000);
-};
+.intro p {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 40px;
+}
 
-// Countdown Timer
-const countdown = () => {
-  const futureDate = new Date("Dec 23, 2024 18:30:00").getTime(); // Remplace par votre prochaine rencontre
-  const now = new Date().getTime();
-  const distance = futureDate - now;
+.gallery {
+  margin-bottom: 50px;
+}
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Quatre colonnes */
+  gap: 10px; /* Espacement entre les images */
+  margin-bottom: 30px;
+}
 
-  document.getElementById(
-    "countdown-timer"
-  ).innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+.photo-grid img {
+  width: 100%;
+  height: 200px;
+  border-radius: 15px;
+  transition: transform 0.3s ease, opacity 1s ease-in-out;
+  opacity: 1;
+  object-fit: cover;
+}
 
-  if (distance < 0) {
-    document.getElementById("countdown-timer").innerHTML = "Enfin ensemble !";
-  }
-};
+.photo-grid img:hover {
+  transform: scale(1.05); /* Agrandit légèrement l'image au survol */
+  opacity: 0.8; /* Diminue l'opacité */
+}
 
-setInterval(countdown, 1000);
+.hidden {
+  opacity: 0;
+}
+
+.countdown h2,
+.message h2 {
+  font-size: 2em;
+  color: #ff6347;
+  margin-bottom: 15px;
+}
+
+#countdown-timer {
+  font-size: 2em;
+  margin: 20px 0;
+}
+
+.message p {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: #444;
+  padding: 0 20px;
+}
+
+footer p {
+  margin-top: 50px;
+  color: #999;
+}
