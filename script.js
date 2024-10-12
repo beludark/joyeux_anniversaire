@@ -44,8 +44,8 @@ window.onload = function () {
   changePhotos(); // Afficher les premières photos
   countdown(); // Démarrer le compte à rebours
 
-  // Changer les photos toutes les 5 secondes
-  setInterval(changePhotos, 5000);
+  // Changer les photos toutes les 6.5 secondes
+  setInterval(changePhotos, 6500);
 };
 
 // Countdown Timer
