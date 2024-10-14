@@ -90,4 +90,4 @@ function createHeart() {
 }
 
 // Créer des cœurs régulièrement
-setInterval(createHeart, 500); // Un nouveau cœur toutes les 0.5 secondes
+setInterval(createHeart, 500); // Nouveau cœur toutes les 0.5 secondes 
