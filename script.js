@@ -71,3 +71,23 @@ const countdown = () => {
 };
 
 setInterval(countdown, 1000);
+// Fonction pour créer des cœurs flottants
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+
+  // Position aléatoire
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = Math.random() * 3 + 3 + "s"; // Entre 3 et 6 secondes
+
+  // Ajoute le cœur au conteneur
+  document.getElementById("hearts-container").appendChild(heart);
+
+  // Retirer le cœur après l'animation
+  setTimeout(() => {
+    heart.remove();
+  }, 6000); // Correspond à la durée maximale de l'animation
+}
+
+// Créer des cœurs régulièrement
+setInterval(createHeart, 500); // Un nouveau cœur toutes les 0.5 secondes
